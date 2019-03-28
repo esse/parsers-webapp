@@ -6,5 +6,5 @@ require_relative "pipeline"
 require_relative "sources"
 
 Sources.new.each do |source|
-  Fetcher.new(config)
+  puts Fetcher.new(config).fetch
 end
