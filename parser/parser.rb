@@ -7,9 +7,10 @@ class Parser
   end
 
   def parse
-    parsed_html.xpath(xpaths["list"]).map do |event|
+    list.map do |event|
       {
-        name: event.xpath(xpaths["name"]).inner_html
+        name: Pipeline.new(commands: source["name"], parsed_html: event).process
+        # name: event.xpath(xpaths["name"]).inner_html
       }
     end
   end
@@ -20,6 +21,10 @@ class Parser
 
   def parsed_html
     @parsed_html ||= Nokogiri::HTML.parse(html)
+  end
+
+  def list
+    @list ||= Pipeline.new(commands: source["list"], parsed_html: parsed_html).process
   end
 
   def xpaths
