@@ -1,4 +1,6 @@
-require "httparty"
+# frozen_string_literal: true
+
+require 'httparty'
 
 class Fetcher
   def initialize(source:, http_adapter: HTTParty)
@@ -7,7 +9,7 @@ class Fetcher
   end
 
   def fetch
-    http_adapter.get(source["url"])
+    http_adapter.get(source['url'])
   end
 
   private

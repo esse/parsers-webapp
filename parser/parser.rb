@@ -1,4 +1,6 @@
-require "nokogiri"
+# frozen_string_literal: true
+
+require 'nokogiri'
 
 class Parser
   def initialize(source:, html:)
@@ -9,8 +11,12 @@ class Parser
   def parse
     list.map do |event|
       {
-        name: Pipeline.new(commands: source["name"], parsed_html: event).process
-        # name: event.xpath(xpaths["name"]).inner_html
+        name: Pipeline.new(commands: source['name'], parsed_html: event).process,
+        description: '',
+        date_from: '',
+        date_to: '',
+        hour_from: '',
+        hour_to: ''
       }
     end
   end
@@ -24,10 +30,10 @@ class Parser
   end
 
   def list
-    @list ||= Pipeline.new(commands: source["list"], parsed_html: parsed_html).process
+    @list ||= Pipeline.new(commands: source['list'], parsed_html: parsed_html).process
   end
 
   def xpaths
-    source["xpaths"]
+    source['xpaths']
   end
 end

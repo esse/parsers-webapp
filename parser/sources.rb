@@ -1,5 +1,7 @@
-require "yaml"
-require "forwardable"
+# frozen_string_literal: true
+
+require 'yaml'
+require 'forwardable'
 
 class Sources
   extend Forwardable
@@ -16,6 +18,6 @@ class Sources
   private
 
   def path
-    File.join(File.expand_path(File.dirname(__FILE__)), "sources/*.yml")
+    File.join(__dir__, 'sources/*.yml')
   end
 end

@@ -1,4 +1,6 @@
-require_relative "command"
+# frozen_string_literal: true
+
+require_relative 'command'
 
 class Pipeline
   def initialize(commands:, parsed_html:)
