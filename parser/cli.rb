@@ -6,5 +6,6 @@ require_relative "pipeline"
 require_relative "sources"
 
 Sources.new.each do |source|
-  puts Fetcher.new(config).fetch
+  html = Fetcher.new(source: source).fetch
+  puts Parser.new(source: source, html: html).parse
 end
