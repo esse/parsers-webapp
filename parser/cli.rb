@@ -21,10 +21,6 @@ OptionParser.new do |opts|
   opts.on('-w', '--write path', 'Write JSONL output into file with provided path') do |w|
     options[:write] = w
   end
-
-  opts.on('-u', '--upload url', 'Upload JSONL output into provided url') do |u|
-    options[:url] = u
-  end
 end.parse!
 
 App.new(options).run!
