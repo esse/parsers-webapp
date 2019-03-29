@@ -2,6 +2,8 @@
 
 require_relative 'app'
 
+require "optionparser"
+
 # TODO: add option parser and help
 
 options = {}

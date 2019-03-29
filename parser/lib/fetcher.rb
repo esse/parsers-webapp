@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'httparty'
-
 class Fetcher
   def initialize(source:, http_adapter: HTTParty)
     @http_adapter = http_adapter

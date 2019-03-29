@@ -1,5 +1,7 @@
 require 'bundler'
 
+Bundler.require(:default)
+
 require_relative 'config/sources'
 require_relative 'lib/fetcher'
 require_relative 'lib/pipeline'
