@@ -1,3 +1,5 @@
-require_relative "web_app"
+# frozen_string_literal: true
+
+require_relative 'web_app'
 
 run WebApp
