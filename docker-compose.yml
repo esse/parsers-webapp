@@ -1,0 +1,22 @@
+version: '2.4'
+
+services:
+  web:
+    image: esse/dahlia-web-app
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "80:3000"
+    volumes:
+      - ./log:/app/log
+    environment:
+      DB_HOST:
+      DB_USERNAME:
+      DB_PASSWORD:
+      DB_NAME:
+      ERRBIT_KEY:
+      RAILS_ENV:
+      SECRET_KEY_BASE:
+  parser:
+    test: "X"
+  postgres:
+    test: "X"
