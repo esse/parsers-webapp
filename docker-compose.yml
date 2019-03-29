@@ -1,21 +1,12 @@
 version: '2.4'
 
 services:
-  web:
+  web_app:
     image: esse/dahlia-web_app
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     ports:
-      - "80:3000"
+      - "9292:9292"
     volumes:
-      - ./log:/app/log
-    environment:
-      DB_HOST:
-      DB_USERNAME:
-      DB_PASSWORD:
-      DB_NAME:
-      ERRBIT_KEY:
-      RAILS_ENV:
-      SECRET_KEY_BASE:
+      - ./data:/app/data
   parser:
     image: esse/dahlia-parser
     command: bundle exec ruby cli.rb -w data/database.jsonl
