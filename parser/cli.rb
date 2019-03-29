@@ -27,7 +27,4 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-p options
-p ARGV
-
-App.new(options).run
+App.new(options).run!

@@ -2,7 +2,7 @@
 
 require 'bundler'
 
-Bundler.require(:default, :development)
+Bundler.require(:default)
 
 require_relative 'config/sources'
 require_relative 'lib/fetcher'
@@ -10,13 +10,14 @@ require_relative 'lib/pipeline'
 require_relative 'lib/parser'
 require_relative 'lib/command'
 require_relative 'lib/uploader'
+require_relative 'lib/writer'
 
 class App
   def initialize(options)
     @options = options
   end
 
-  def run
+  def run!
     if options[:check]
       return
     end
