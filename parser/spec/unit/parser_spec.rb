@@ -37,8 +37,21 @@ describe Parser do
   end
 
   describe '#parse' do
-    it 'works' do
+    it 'parse incoming html with nokogiri' do
+      expect(nokogiri_html_mock).to receive(:parse).with(html).and_return(parsed_html)
       parser.parse
+    end
+
+    it 'runs pipeline on list of events' do
+
+    end
+
+    it 'runs pipeline of each event' do
+
+    end
+
+    it 'returns hash with transformed with pipeline values' do
+
     end
   end
 end

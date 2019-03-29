@@ -5,11 +5,10 @@ require 'bundler'
 Bundler.require(:default)
 
 require_relative 'config/sources'
-require_relative 'lib/fetcher'
-require_relative 'lib/pipeline'
-require_relative 'lib/parser'
 require_relative 'lib/command'
-require_relative 'lib/uploader'
+require_relative 'lib/fetcher'
+require_relative 'lib/parser'
+require_relative 'lib/pipeline'
 require_relative 'lib/writer'
 
 class App
@@ -28,10 +27,6 @@ class App
     if options[:write]
       Writer.new(output: parsed_output, path: options[:write]).run
       puts "Written #{parsed_output.count} entries to #{options[:write]}."
-    end
-    if options[:url]
-      Uploader.new(output: parsed_output, url: options[:url]).run
-      puts "Uploaded #{parsed_output.count} entries to #{options[:url]}."
     end
   end
 
