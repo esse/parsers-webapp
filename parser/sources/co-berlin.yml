@@ -11,3 +11,6 @@ date_from: ""
 date_to: ""
 hour_from: ""
 hour_to: ""
+source:
+  - command: constant
+    argument: "co-berlin"

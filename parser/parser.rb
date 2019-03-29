@@ -16,7 +16,8 @@ class Parser
         date_from: '',
         date_to: '',
         hour_from: '',
-        hour_to: ''
+        hour_to: '',
+        source: Pipeline.new(commands: source['source'], parsed_html: event).process
       }
     end
   end

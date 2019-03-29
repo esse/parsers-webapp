@@ -20,6 +20,8 @@ class Command
       ->(x) { x.xpath(command['argument']) }
     when 'inner_html'
       ->(x) { x.inner_html }
+    when 'constant'
+      ->(x) { command['argument'] }
     end
   end
 end
