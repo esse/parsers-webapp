@@ -9,11 +9,10 @@ gem 'httparty'
 gem 'nokogiri'
 
 group :development do
-  gem 'rubocop', require: false
   gem 'pry'
+  gem 'rubocop', require: false
 end
 
 group :test do
   gem 'rspec'
 end
-

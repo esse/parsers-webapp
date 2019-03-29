@@ -21,7 +21,7 @@ class Command
     when 'inner_html'
       ->(x) { x.inner_html }
     when 'constant'
-      ->(x) { command['argument'] }
+      ->(_x) { command['argument'] }
     end
   end
 end

@@ -9,7 +9,6 @@ require_relative 'lib/parser'
 require_relative 'lib/command'
 require_relative 'lib/uploader'
 
-
 # TODO: add option parser and help
 
 Sources.new.each do |source|
