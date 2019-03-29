@@ -10,15 +10,12 @@ class Parser
 
   def parse
     list.map do |event|
-      {
-        name: Pipeline.new(commands: source['name'], parsed_html: event).process,
-        description: '',
-        date_from: '',
-        date_to: '',
-        hour_from: '',
-        hour_to: '',
-        source: Pipeline.new(commands: source['source'], parsed_html: event).process
-      }
+      source['attributes'].dup.map do |attr_name, attr_cfg|
+        [
+          attr_name,
+          Pipeline.new(commands: attr_cfg, parsed_html: event).process
+        ]
+      end.to_h
     end
   end
 

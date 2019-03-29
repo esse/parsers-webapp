@@ -2,15 +2,21 @@ url: "https://www.co-berlin.org/en/calender"
 list:
   - command: xpath
     argument: "//div[@class='view-content']/div[@class='seite-c-single']"
-name:
-  - command: xpath
-    argument: ".//div[@class='article-title']"
-  - command: inner_html
-description: ""
-date_from: ""
-date_to: ""
-hour_from: ""
-hour_to: ""
-source:
-  - command: constant
-    argument: "co-berlin"
+attributes:
+  name:
+    - command: xpath
+      argument: ".//div[@class='article-title']"
+    - command: inner_html
+  # description:
+  #   -
+  # date_from:
+  #   -
+  # date_to:
+  #   -
+  # hour_from:
+  #   -
+  # hour_to:
+  #   -
+  source:
+    - command: constant
+      argument: "co-berlin"
