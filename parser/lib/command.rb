@@ -1,27 +1,27 @@
 # frozen_string_literal: true
 
 class Command
-  def initialize(command:, object:)
-    @command = command
-    @object = object
+  def initialize(instruction:, nodes:)
+    @instruction = instruction
+    @nodes = nodes
   end
 
   def run
-    step.call(object)
+    step.call(nodes)
   end
 
   private
 
-  attr_reader :command, :object
+  attr_reader :instruction, :nodes
 
   def step
-    case command['command']
+    case instruction['operand']
     when 'xpath'
-      ->(x) { x.xpath(command['argument']) }
+      ->(x) { x.xpath(instruction['argument']) }
     when 'inner_html'
       ->(x) { x.inner_html }
     when 'constant'
-      ->(_x) { command['argument'] }
+      ->(_) { instruction['argument'] }
     end
   end
 end

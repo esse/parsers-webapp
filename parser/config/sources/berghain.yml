@@ -1,30 +1,30 @@
 url: "http://berghain.de/events/"
 list:
-  - command: xpath
+  - operand: xpath
     argument: "//div[@class='content']/div[@class='x3cols']/div[contains(@class, 'col_teaser')]"
 pagination:
-  - command: xpath
+  - operand: xpath
     argument: ""
 attributes:
   name:
-    - command: xpath
+    - operand: xpath
       argument: ".//h4/span/a/span"
-    - command: inner_html # TODO - maybe this can be included in the xpath?
+    - operand: inner_html # TODO - maybe this can be included in the xpath?
   description:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   date_from:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   date_to:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   hour_from:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   hour_to:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   source:
-    - command: constant
+    - operand: constant
       argument: "berghain"

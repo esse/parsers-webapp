@@ -13,7 +13,7 @@ class Parser
       source['attributes'].dup.map do |attr_name, attr_cfg|
         [
           attr_name,
-          Pipeline.new(commands: attr_cfg, parsed_html: event).process
+          Pipeline.new(instructions: attr_cfg, parsed_html: event).process
         ]
       end.to_h
     end
@@ -28,7 +28,7 @@ class Parser
   end
 
   def list
-    @list ||= Pipeline.new(commands: source['list'], parsed_html: parsed_html).process
+    @list ||= Pipeline.new(instructions: source['list'], parsed_html: parsed_html).process
   end
 
   def xpaths

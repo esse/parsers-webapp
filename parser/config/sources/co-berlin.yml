@@ -1,30 +1,30 @@
 url: "https://www.co-berlin.org/en/calender"
 list:
-  - command: xpath
+  - operand: xpath
     argument: "//div[@class='view-content']/div[@class='seite-c-single']"
 pagination:
-  - command: xpath
+  - operand: xpath
     argument: ""
 attributes:
   name:
-    - command: xpath
+    - operand: xpath
       argument: ".//div[@class='article-title']"
-    - command: inner_html
+    - operand: inner_html
   description:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   date_from:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   date_to:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   hour_from:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   hour_to:
-    - command: constant
+    - operand: constant
       argument: "TODO"
   source:
-    - command: constant
+    - operand: constant
       argument: "co-berlin"
