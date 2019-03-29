@@ -6,6 +6,8 @@ require 'forwardable'
 class Sources
   extend Forwardable
 
+  # TODO: add option to load data only from single source
+
   def initialize
     @parsers = []
     Dir.glob(path) do |rb_file|

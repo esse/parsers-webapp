@@ -9,6 +9,7 @@ class Pipeline
   end
 
   def process
+    # TODO: refactor me
     to_change = parsed_html
     commands.each do |command|
       to_change = Command.new(command: command, object: to_change).run

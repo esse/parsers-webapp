@@ -7,7 +7,7 @@ require_relative 'parser'
 require_relative 'pipeline'
 require_relative 'sources'
 
-require 'pry'
+# TODO: add option parser and help
 
 Sources.new.each do |source|
   html = Fetcher.new(source: source).fetch
