@@ -2,10 +2,13 @@
 
 require 'bundler'
 
-require_relative 'fetcher'
-require_relative 'parser'
-require_relative 'pipeline'
-require_relative 'sources'
+require_relative 'config/sources'
+require_relative 'lib/fetcher'
+require_relative 'lib/pipeline'
+require_relative 'lib/parser'
+require_relative 'lib/command'
+require_relative 'lib/uploader'
+
 
 # TODO: add option parser and help
 
