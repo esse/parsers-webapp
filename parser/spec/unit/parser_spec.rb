@@ -42,8 +42,19 @@ describe Parser do
       parser.parse
     end
 
-    it 'runs pipeline on list of events' do
+    it 'instantize pipeline on list of events' do
+      expect(pipeline_mock)
+        .to receive(:new)
+        .with(instructions: list_instruction, parsed_html: parsed_html)
+        .and_return(list_pipeline)
 
+      parser.parse
+    end
+
+    it "process pipeline on list of events" do
+      expect(list_pipeline).to receive(:process).and_return(event_lists)
+
+      parser.parse
     end
 
     it 'runs pipeline of each event' do
