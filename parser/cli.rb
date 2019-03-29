@@ -14,23 +14,20 @@ OptionParser.new do |opts|
     options[:check] = c
   end
 
-  opts.on('-f', '--filter regexp', 'Filter yamls with provided regexp') do |r|
-    options[:regexp] = r
+  opts.on('-f', '--filter expression', 'Filter yamls with provided bash-like expression') do |f|
+    options[:filter] = f
   end
 
-  opts.on('-w', '--write path', 'Write JSON output into file with provided path') do |w|
+  opts.on('-w', '--write path', 'Write JSONL output into file with provided path') do |w|
     options[:write] = w
   end
 
-  opts.on('-u', '--upload url', 'Upload JSON output into provided url') do |u|
-    options[:upload] = u
+  opts.on('-u', '--upload url', 'Upload JSONL output into provided url') do |u|
+    options[:url] = u
   end
 end.parse!
 
 p options
 p ARGV
 
-# Sources.new.each do |source|
-#   html = Fetcher.new(source: source).fetch
-#   puts Parser.new(source: source, html: html).parse
-# end
+App.new(options).run
