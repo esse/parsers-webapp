@@ -1,15 +1,15 @@
-url: "https://www.co-berlin.org/en/calender"
+url: "http://berghain.de/events/"
 list:
   - command: xpath
-    argument: "//div[@class='view-content']/div[@class='seite-c-single']"
+    argument: "//div[@class='content']/div[@class='x3cols']/div[contains(@class, 'col_teaser')]"
 pagination:
   - command: xpath
     argument: ""
 attributes:
   name:
     - command: xpath
-      argument: ".//div[@class='article-title']"
-    - command: inner_html
+      argument: ".//h4/span/a/span"
+    - command: inner_html # TODO - maybe this can be included in the xpath?
   description:
     - command: constant
       argument: "TODO"
@@ -27,4 +27,4 @@ attributes:
       argument: "TODO"
   source:
     - command: constant
-      argument: "co-berlin"
+      argument: "berghain"
