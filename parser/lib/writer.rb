@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Writer
   def initialize(output:, path:)
     @output = output

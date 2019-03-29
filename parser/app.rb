@@ -18,9 +18,8 @@ class App
   end
 
   def run!
-    if options[:check]
-      return
-    end
+    return if options[:check]
+
     parsed_output = Sources.new(expression: options[:filter]).flat_map do |source|
       html = Fetcher.new(source: source).fetch
       Parser.new(source: source, html: html).parse
