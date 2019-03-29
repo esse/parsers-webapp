@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'nokogiri'
-
 class Parser
-  def initialize(source:, html:)
+  def initialize(source:, html:, pipeline: Pipeline, nokogiri_html: Nokogiri::HTML)
     @source = source
     @html = html
+    @pipeline = pipeline
+    @nokogiri_html = nokogiri_html
   end
 
   def parse
@@ -13,7 +13,7 @@ class Parser
       source['attributes'].dup.map do |attr_name, attr_cfg|
         [
           attr_name,
-          Pipeline.new(instructions: attr_cfg, parsed_html: event).process
+          pipeline.new(instructions: attr_cfg, parsed_html: event).process
         ]
       end.to_h
     end
@@ -21,14 +21,14 @@ class Parser
 
   private
 
-  attr_reader :html, :source
+  attr_reader :html, :source, :pipeline, :nokogiri_html
 
   def parsed_html
-    @parsed_html ||= Nokogiri::HTML.parse(html)
+    @parsed_html ||= nokogiri_html.parse(html)
   end
 
   def list
-    @list ||= Pipeline.new(instructions: source['list'], parsed_html: parsed_html).process
+    @list ||= pipeline.new(instructions: source['list'], parsed_html: parsed_html).process
   end
 
   def xpaths
