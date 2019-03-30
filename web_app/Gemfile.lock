@@ -8,6 +8,7 @@ GEM
     jaro_winkler (1.5.2)
     json (2.2.0)
     jsonl (0.1.5)
+    levenshtein (0.2.2)
     method_source (0.9.2)
     mustermann (1.0.3)
     parallel (1.16.2)
@@ -62,6 +63,7 @@ PLATFORMS
 
 DEPENDENCIES
   jsonl
+  levenshtein
   pry
   puma
   rspec

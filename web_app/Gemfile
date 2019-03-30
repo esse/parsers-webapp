@@ -8,6 +8,7 @@ ruby '2.6.2'
 gem 'jsonl'
 gem 'puma'
 gem 'sinatra'
+gem "levenshtein"
 
 group :development do
   gem 'rubocop', require: false

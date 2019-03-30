@@ -19,12 +19,6 @@ attributes:
   date_to:
     - operand: constant
       argument: "TODO"
-  hour_from:
-    - operand: constant
-      argument: "TODO"
-  hour_to:
-    - operand: constant
-      argument: "TODO"
   source:
     - operand: constant
       argument: "berghain"

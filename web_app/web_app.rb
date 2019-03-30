@@ -11,7 +11,12 @@ class WebApp < Sinatra::Base
   end
 
   get '/' do
-    erb :index, locals: { database: database.all }
+    if params[:name]
+      events = database.filter_by_name(params[:name])
+    else
+      events = database.all
+    end
+    erb :index, locals: { events: events }
   end
 
   private

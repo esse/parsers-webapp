@@ -1,7 +1,22 @@
 <table class="table table-striped table-condensed">
-  <% database.each do |record| %>
+  <thead>
     <tr>
-      <td><%= record["name"] %></td>
+      <th>Name</th>
+      <th>Date from</th>
+      <th>Date to</th>
+      <th>Description</th>
+      <th>Source</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% events.each do |event| %>
+      <tr>
+        <td><%= event["name"] %></td>
+        <td><%= event["date_from"] %></td>
+        <td><%= event["date_to"] %></td>
+        <td><%= event["description"] %></td>
+        <td><%= event["source"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
