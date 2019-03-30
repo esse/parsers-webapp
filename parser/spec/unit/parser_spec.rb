@@ -57,7 +57,7 @@ describe Parser do
       parser.parse
     end
 
-    it 'runs pipeline of each event' do
+    it 'runs pipeline for each event' do
 
     end
 

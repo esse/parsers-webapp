@@ -7,8 +7,10 @@ services:
       - "9292:9292"
     volumes:
       - ./data:/app/data
+    environment:
+      - DATABASE=/app/data/database.jsonl
   parser:
     image: esse/dahlia-parser
-    command: bundle exec ruby cli.rb -w data/database.jsonl
+    command: bundle exec ruby cli.rb -w /app/data/database.jsonl
     volumes:
       - ./data:/app/data
