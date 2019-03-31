@@ -6,10 +6,14 @@ attributes:
   name:
     - operand: xpath
       argument: ".//h4/span/a/span"
-    - operand: inner_html # TODO - maybe this can be included in the xpath?
-  description:
-    - operand: constant
-      argument: "TODO"
+    - operand: inner_html
+  link:
+    - operand: xpath
+      argument: ".//h4/span/a"
+    - operand: attr
+      argument: href
+    - operand: prepend_single_string
+      argument: "http://berghain.de"
   date_from:
     - operand: xpath
       argument: ".//h4/span/a"

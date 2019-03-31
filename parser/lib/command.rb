@@ -30,7 +30,12 @@ class Command
     when 'parse_as_date'
       ->(x) { Date.parse(x) }
     when 'or'
-      ->(x) { instruction['argument'].flat_map { |instructions| Pipeline.new(instructions: instructions, parsed_html: x).process}.find { |x| !x.nil? && !x.blank? } }
+      ->(x) {
+        instruction['argument'].flat_map do |instructions|
+          Pipeline.new(instructions: instructions, parsed_html: x).process
+        end
+        .find { |x| !x.nil? && !x.blank? }
+      }
     when 'uniq'
       ->(x) { x.uniq }
     when 'extract_href'
@@ -38,11 +43,18 @@ class Command
     when 'compact'
       ->(x) { x.reject(&:empty?) }
     when 'concat'
-      ->(x) { instruction['argument'].flat_map { |instructions| Pipeline.new(instructions: instructions, parsed_html: x).process } }
+      ->(x) { instruction['argument'].flat_map do |instructions|
+          Pipeline.new(instructions: instructions, parsed_html: x).process
+        end
+      }
     when 'prepend_string'
       ->(x) { x.map { |s| instruction['argument'] + s } }
+    when 'prepend_single_string'
+      ->(x) { instruction['argument'] + x }
     when 'puts'
       ->(x) { puts x; x }
+    when 'first'
+      ->(x) { x.first }
     end
   end
 end

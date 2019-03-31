@@ -17,7 +17,7 @@ class Dataset
 
   def filter_by_date(date)
     filtered_by_date = array.find_all do |record|
-      date_from = record["date_from"] # TODO: should be validated!
+      date_from = record["date_from"]
       date_to = record["date_to"]
       date_range = date.parse(date_from)..date.parse(date_to)
       date_range.include?(date)

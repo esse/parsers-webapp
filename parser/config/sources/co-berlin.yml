@@ -20,9 +20,14 @@ attributes:
     - operand: xpath
       argument: ".//div[@class='article-title']"
     - operand: inner_html
-  description:
-    - operand: constant
-      argument: "TODO"
+  link:
+    - operand: xpath
+      argument: "//div[@class='view-content']/div[@class='seite-c-single']/a"
+    - operand: first
+    - operand: attr
+      argument: href
+    - operand: prepend_single_string
+      argument: "https://www.co-berlin.org"
   date_from:
     - operand: or
       argument:

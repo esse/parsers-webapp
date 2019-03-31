@@ -4,8 +4,8 @@
       <th>Name</th>
       <th>Date from</th>
       <th>Date to</th>
-      <th>Description</th>
       <th>Source</th>
+      <th>Go to</th>
     </tr>
   </thead>
   <tbody>
@@ -14,8 +14,8 @@
         <td><%= event["name"] %></td>
         <td><%= event["date_from"] %></td>
         <td><%= event["date_to"] %></td>
-        <td><%= event["description"] %></td>
         <td><%= event["source"] %></td>
+        <td><a href="<%= event["link"] %>">⏩</td>
       </tr>
     <% end %>
   </tbody>

@@ -57,11 +57,11 @@ describe Parser do
       parser.parse
     end
 
-    it 'runs pipeline for each event' do
+    xit 'runs pipeline for each event' do
 
     end
 
-    it 'returns hash with transformed with pipeline values' do
+    xit 'returns hash with transformed with pipeline values' do
 
     end
   end

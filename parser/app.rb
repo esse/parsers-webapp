@@ -2,7 +2,7 @@
 
 require 'bundler'
 
-Bundler.require(:default, :development)
+Bundler.require(:default)
 
 require_relative 'config/sources'
 require_relative 'lib/command'
@@ -30,6 +30,8 @@ class App
     if options[:write]
       Writer.new(output: parsed_output, path: options[:write]).run
       puts "Written #{parsed_output.count} entries to #{options[:write]}."
+    else
+      puts parsed_output
     end
   end
 
