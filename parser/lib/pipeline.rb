@@ -9,7 +9,8 @@ class Pipeline
   end
 
   def process
-    # TODO: refactor me
+    # https://dry-rb.org/gems/dry-monads/result/
+    # TODO: refactor me into a parsing monad
     to_change = parsed_html
     instructions.each do |instruction|
       to_change = Command.new(instruction: instruction, nodes: to_change).run

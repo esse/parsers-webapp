@@ -1,33 +1,45 @@
+require 'date'
+require_relative 'dataset'
+
 class Database
-  def initialize
-    @json = JSONL.parse(File.read(ENV['DATABASE'])) # TODO: move me to cfg
+  def initialize(mutex: Mutex)
+    reload!
+    @modified_at = file_modification_time
+    # @semaphore = mutex.new # synchronise access to @json
+    @sources = @json.map { |record| record["source"] }.uniq.sort
   end
 
-  def all
-    json
+  def file_modification_time
+    File.mtime(ENV['DATABASE'])
   end
 
-  def where(*)
-    json.find_all { |record| record }
+  def should_reload?
+    modified_at != file_modification_time
   end
 
-  def filter_by_name(name)
-    json.find_all { |record| is_similar?(record["name"], name) || is_substring?(record["name"], name) }
+  def reload_if_needed
+    reload! if should_reload?
   end
 
-  def sources
-    @sources ||= json.map { |record| record["source"] }.uniq
+  def reload!
+    # semaphore.synchronize do
+      @json = JSONL.parse(File.read(ENV['DATABASE']))
+    # end
   end
+
+  def dataset
+    Dataset.new(json)
+  end
+
+  attr_reader :sources
 
   private
 
-  def is_similar?(a, b)
-    Levenshtein.normalized_distance(a.downcase,b.downcase) < 0.3 # chosen quasi-randomly ;)
+  def json
+    # semaphore.synchronize do
+      @json
+    # end
   end
 
-  def is_substring?(a, b)
-    a.downcase.include?(b.downcase) || b.downcase.include?(a.downcase)
-  end
-
-  attr_reader :json
+  attr_reader :modified_at, :semaphore
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'date'
 
 class Command
   def initialize(instruction:, nodes:)
@@ -22,6 +23,14 @@ class Command
       ->(x) { x.inner_html }
     when 'constant'
       ->(_) { instruction['argument'] }
+    when 'first_match_group_from_regexp'
+      ->(x) { x.match(Regexp.new(instruction['argument']))[1] } #todo: introduce monad here
+    when 'attr'
+      ->(x) { x.attr(instruction['argument']) }
+    when 'parse_as_date'
+      ->(x) { Date.parse(x) }
+    when 'or'
+      # ->(x) { instruction['argument'].detect { |ins| Command.new(ins, x).run } }
     end
   end
 end

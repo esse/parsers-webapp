@@ -12,7 +12,23 @@
     <div class="container">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Berlin events database</a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Berlin events database</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <select name="source" class="form-control">
+            <option></option>
+            <% @sources.each do |source| %>
+              <option><%= source %></option>
+            <% end %>
+          </select>
+
+          <input type="date" class="form-control" name="date" placeholder="Event date">
+          <input type="title" class="form-control" placeholder="Title" name="name">
+          <input type="submit" class="form-control" value="▶️">
+        </form>
       </nav>
 
       <div>

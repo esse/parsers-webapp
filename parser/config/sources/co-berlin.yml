@@ -14,11 +14,17 @@ attributes:
     - operand: constant
       argument: "TODO"
   date_from:
-    - operand: constant
-      argument: "TODO"
+    - operand: xpath
+      argument: ".//div[@class='article-over-title']/span[@class='article-date']/div[@class='date-display-range']/span[@class='date-display-start']"
+    - operand: attr
+      argument: content
+    # - operand: parse_as_date
   date_to:
-    - operand: constant
-      argument: "TODO"
+    - operand: xpath
+      argument: ".//div[@class='article-over-title']/span[@class='article-date']/div[@class='date-display-range']/span[@class='date-display-end']"
+    - operand: attr
+      argument: content
+    # - operand: parse_as_date
   source:
     - operand: constant
       argument: "co-berlin"

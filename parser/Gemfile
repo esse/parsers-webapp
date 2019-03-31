@@ -8,6 +8,7 @@ ruby '2.6.2'
 gem 'httparty'
 gem 'jsonl'
 gem 'nokogiri'
+gem 'dry-monads'
 
 group :development do
   gem 'pry'
