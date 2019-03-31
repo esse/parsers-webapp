@@ -3,8 +3,18 @@ list:
   - operand: xpath
     argument: "//div[@class='view-content']/div[@class='seite-c-single']"
 pagination:
-  - operand: xpath
-    argument: ""
+  - operand: concat
+    argument:
+    - - operand: xpath
+        argument: "//div[@class='pagination-centered']/div[@class='item-list']/ul/li/a"
+      - operand: extract_href
+      - operand: compact
+      - operand: prepend_string
+        argument: "https://www.co-berlin.org"
+    - - operand: xpath
+        argument: "//link[@rel='canonical']"
+      - operand: extract_href
+  - operand: uniq
 attributes:
   name:
     - operand: xpath

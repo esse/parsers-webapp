@@ -2,11 +2,12 @@
 
 require 'bundler'
 
-Bundler.require(:default)
+Bundler.require(:default, :development)
 
 require_relative 'config/sources'
 require_relative 'lib/command'
 require_relative 'lib/fetcher'
+require_relative 'lib/paginator'
 require_relative 'lib/parser'
 require_relative 'lib/pipeline'
 require_relative 'lib/writer'
@@ -20,8 +21,10 @@ class App
     return if options[:check]
 
     parsed_output = Sources.new(expression: options[:filter]).flat_map do |source|
-      html = Fetcher.new(source: source).fetch
-      Parser.new(source: source, html: html).parse
+      Paginator.new(source: source).get_page_list.flat_map do |url|
+        html = Fetcher.new(url: url).fetch
+        Parser.new(source: source, html: html).parse
+      end
     end
     puts "Fetched #{parsed_output.count} entries."
     if options[:write]

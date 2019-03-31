@@ -2,9 +2,6 @@ url: "http://berghain.de/events/"
 list:
   - operand: xpath
     argument: "//div[@class='content']/div[@class='x3cols']/div[contains(@class, 'col_teaser')]"
-pagination:
-  - operand: xpath
-    argument: ""
 attributes:
   name:
     - operand: xpath

@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class Fetcher
-  def initialize(source:, http_adapter: HTTParty)
+  def initialize(url:, http_adapter: HTTParty)
     @http_adapter = http_adapter
-    @source = source
+    @url = url
   end
 
   def fetch
-    http_adapter.get(source['url'])
+    http_adapter.get(url)
   end
 
   private
 
-  attr_reader :http_adapter, :source
+  attr_reader :url, :http_adapter
 end
