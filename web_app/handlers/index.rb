@@ -12,7 +12,7 @@ module Handlers
       if sanitized_params["name"]
         @dataset = @dataset.filter_by_name(sanitized_params["name"])
       end
-      if sanitized_params["date"]
+      if sanitized_params["date"] && Validators::Date.is_valid?(sanitized_params["date"])
         date = date_class.parse(sanitized_params["date"])
         @dataset = @dataset.filter_by_date(date)
       end

@@ -59,7 +59,7 @@ describe Handlers::Index do
     end
 
     describe 'when filtering with date' do
-      let(:params) { {"date" => "XYZ"} }
+      let(:params) { {"date" => "2018-10-11"} }
       let(:some_date) { "ABC" }
 
       before do
@@ -74,6 +74,20 @@ describe Handlers::Index do
 
       it 'must parse incoming date' do
         expect(date_mock).to receive(:parse).and_return(some_date)
+        index_handler.call
+      end
+    end
+
+    describe 'when filtering with wrong date' do
+      let(:params) { {"date" => "XXXX"} }
+      let(:some_date) { "ABC" }
+
+      before do
+        allow(date_mock).to receive(:parse).and_return(some_date)
+      end
+
+      it 'must not call filter_by_date on dataset' do
+        expect(dataset_mock).not_to receive(:filter_by_date)
         index_handler.call
       end
     end

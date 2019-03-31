@@ -2,12 +2,11 @@ require 'date'
 require_relative 'dataset'
 
 class Database
-  MUTEX = Mutex.new
+  MUTEX = Mutex.new # synchronise access to @json
 
   def initialize
     reload!
     @modified_at = file_modification_time
-    # @semaphore = mutex.new # synchronise access to @json
     @sources = @json.map { |record| record["source"] }.uniq.sort
   end
 

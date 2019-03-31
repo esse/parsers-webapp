@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 Bundler.require(:default)
 
+require 'date'
+
 require 'sinatra/base'
 require_relative 'lib/database'
 require_relative 'adapters/index'
 
 require_relative 'handlers/index'
-
-require 'date'
+require_relative 'validators/date'
 
 class WebApp < Sinatra::Base
   def initialize
