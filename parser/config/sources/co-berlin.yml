@@ -24,17 +24,25 @@ attributes:
     - operand: constant
       argument: "TODO"
   date_from:
-    - operand: xpath
-      argument: ".//div[@class='article-over-title']/span[@class='article-date']/div[@class='date-display-range']/span[@class='date-display-start']"
-    - operand: attr
-      argument: content
-    # - operand: parse_as_date
+    - operand: or
+      argument:
+      - - operand: xpath
+          argument: ".//div[@class='article-over-title']/span[@class='article-date']/div[@class='date-display-range']/span[@class='date-display-start']"
+        - operand: attr
+          argument: content
+      - - operand: xpath
+          argument: ".//div[@class='article-over-title']/span[@class='article-date']/span[@class='date-display-single']"
+    - operand: parse_as_date
   date_to:
-    - operand: xpath
-      argument: ".//div[@class='article-over-title']/span[@class='article-date']/div[@class='date-display-range']/span[@class='date-display-end']"
-    - operand: attr
-      argument: content
-    # - operand: parse_as_date
+    - operand: or
+      argument:
+      - - operand: xpath
+          argument: ".//div[@class='article-over-title']/span[@class='article-date']/div[@class='date-display-range']/span[@class='date-display-end']"
+        - operand: attr
+          argument: content
+      - - operand: xpath
+          argument: ".//div[@class='article-over-title']/span[@class='article-date']/span[@class='date-display-single']"
+    - operand: parse_as_date
   source:
     - operand: constant
       argument: "co-berlin"

@@ -7,9 +7,7 @@ class Paginator
 
   def get_page_list # return list of uris
     return Array(source['url']) unless source['pagination']
-    x = Pipeline.new(instructions: source['pagination'], parsed_html: Nokogiri::HTML(fetcher.new(url: source['url']).fetch)).process
-    puts x
-    exit(0)
+    Pipeline.new(instructions: source['pagination'], parsed_html: Nokogiri::HTML(fetcher.new(url: source['url']).fetch)).process
   end
 
   private

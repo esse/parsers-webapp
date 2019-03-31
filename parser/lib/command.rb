@@ -30,7 +30,7 @@ class Command
     when 'parse_as_date'
       ->(x) { Date.parse(x) }
     when 'or'
-      # ->(x) { instruction['argument'].detect { |ins| Command.new(ins, x).run } }
+      ->(x) { instruction['argument'].flat_map { |instructions| Pipeline.new(instructions: instructions, parsed_html: x).process}.find { |x| !x.nil? && !x.blank? } }
     when 'uniq'
       ->(x) { x.uniq }
     when 'extract_href'
@@ -41,6 +41,8 @@ class Command
       ->(x) { instruction['argument'].flat_map { |instructions| Pipeline.new(instructions: instructions, parsed_html: x).process } }
     when 'prepend_string'
       ->(x) { x.map { |s| instruction['argument'] + s } }
+    when 'puts'
+      ->(x) { puts x; x }
     end
   end
 end
