@@ -24,20 +24,9 @@ class WebApp < Sinatra::Base
   end
 
   get '/' do
-    @dataset = database.dataset
-    sanitized_params = Adapters::Index.new(params: params).sanitized_params
-    puts sanitized_params
-    if sanitized_params["name"]
-      @dataset = @dataset.filter_by_name(sanitized_params["name"])
-    end
-    if sanitized_params["date"]
-      date = Date.parse(sanitized_params["date"])
-      @dataset = @dataset.filter_by_date(date)
-    end
-    if sanitized_params["source"]
-      @dataset = @dataset.filter_by_source(sanitized_params["source"])
-    end
-    erb :index
+    handler = Handlers::Index.new(params: params, database: database)
+    handler.call
+    erb :index, locals: handler.locals
   end
 
   private
