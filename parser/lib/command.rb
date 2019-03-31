@@ -24,7 +24,7 @@ class Command
     when 'constant'
       ->(_) { instruction['argument'] }
     when 'first_match_group_from_regexp'
-      ->(x) { x.match(Regexp.new(instruction['argument']))[1] } #todo: introduce monad here
+      ->(x) { x.match(Regexp.new(instruction['argument']))[1] }
     when 'attr'
       ->(x) { x.attr(instruction['argument']) }
     when 'parse_as_date'

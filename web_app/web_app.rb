@@ -3,6 +3,9 @@ Bundler.require(:default)
 
 require 'sinatra/base'
 require_relative 'lib/database'
+require_relative 'adapters/index'
+
+require_relative 'handlers/index'
 
 require 'date'
 
@@ -22,16 +25,17 @@ class WebApp < Sinatra::Base
 
   get '/' do
     @dataset = database.dataset
-    print @dataset
-    if params[:name]
-      @dataset = @dataset.filter_by_name(params[:name])
+    sanitized_params = Adapters::Index.new(params: params).sanitized_params
+    puts sanitized_params
+    if sanitized_params["name"]
+      @dataset = @dataset.filter_by_name(sanitized_params["name"])
     end
-    if params[:date]
-      date = Date.parse(params[:date])
+    if sanitized_params["date"]
+      date = Date.parse(sanitized_params["date"])
       @dataset = @dataset.filter_by_date(date)
     end
-    if params[:source]
-      @dataset = @dataset.filter_by_source(params[:source])
+    if sanitized_params["source"]
+      @dataset = @dataset.filter_by_source(sanitized_params["source"])
     end
     erb :index
   end
