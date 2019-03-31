@@ -5,10 +5,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.2'
 
+gem 'dry-monads'
 gem 'httparty'
 gem 'jsonl'
 gem 'nokogiri'
-gem 'dry-monads'
 
 group :development do
   gem 'pry'

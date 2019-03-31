@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'date'
 
 class Command
@@ -30,11 +31,11 @@ class Command
     when 'parse_as_date'
       ->(x) { Date.parse(x) }
     when 'or'
-      ->(x) {
+      lambda { |x|
         instruction['argument'].flat_map do |instructions|
           Pipeline.new(instructions: instructions, parsed_html: x).process
         end
-        .find { |x| !x.nil? && !x.blank? }
+                               .find { |x| !x.nil? && !x.blank? }
       }
     when 'uniq'
       ->(x) { x.uniq }
@@ -43,7 +44,8 @@ class Command
     when 'compact'
       ->(x) { x.reject(&:empty?) }
     when 'concat'
-      ->(x) { instruction['argument'].flat_map do |instructions|
+      lambda { |x|
+        instruction['argument'].flat_map do |instructions|
           Pipeline.new(instructions: instructions, parsed_html: x).process
         end
       }

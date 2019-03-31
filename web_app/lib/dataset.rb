@@ -3,9 +3,9 @@ require 'forwardable'
 class Dataset
   extend Forwardable
 
-  def initialize(array, date: Date)
+  def initialize(array, date_class: Date)
     @array = array
-    @date = date
+    @date_class = date_class
   end
 
   def filter_by_name(name)
@@ -19,7 +19,7 @@ class Dataset
     filtered_by_date = array.find_all do |record|
       date_from = record["date_from"]
       date_to = record["date_to"]
-      date_range = date.parse(date_from)..date.parse(date_to)
+      date_range = date_class.parse(date_from)..date_class.parse(date_to)
       date_range.include?(date)
     end
     Dataset.new(filtered_by_date)
@@ -45,5 +45,5 @@ class Dataset
     a.downcase.include?(b.downcase) || b.downcase.include?(a.downcase)
   end
 
-  attr_reader :array, :date
+  attr_reader :array, :date_class
 end

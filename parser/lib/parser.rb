@@ -8,7 +8,7 @@ class Parser
     @nokogiri_html = nokogiri_html
   end
 
-  def parse
+  def parse # Todo: there are too many responsibilities here
     list.map do |event|
       source['attributes'].dup.map do |attr_name, attr_cfg|
         [

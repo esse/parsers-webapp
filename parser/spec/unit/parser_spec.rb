@@ -13,16 +13,16 @@ describe Parser do
   let(:source) do
     {
       'list' => list_instruction,
-      'xpaths' => xpaths_instructions,
+      'xpaths' => xpaths_instructions
     }
   end
-  let(:html) { "X" }
-  let(:parsed_html) { "parsed x" }
+  let(:html) { 'X' }
+  let(:parsed_html) { 'parsed x' }
   let(:pipeline_mock) { class_double('Pipeline') }
   let(:nokogiri_html_mock) { class_double('Nokogiri::HTML') }
-  let(:list_instruction) { "some_instruction" }
+  let(:list_instruction) { 'some_instruction' }
   let(:xpaths_instructions) { [] }
-  let(:parsed_event) { "some parsed event data"}
+  let(:parsed_event) { 'some parsed event data' }
   let(:event_lists) { [] }
 
   let(:list_pipeline) { instance_double('Pipeline') }
@@ -51,18 +51,16 @@ describe Parser do
       parser.parse
     end
 
-    it "process pipeline on list of events" do
+    it 'process pipeline on list of events' do
       expect(list_pipeline).to receive(:process).and_return(event_lists)
 
       parser.parse
     end
 
     xit 'runs pipeline for each event' do
-
     end
 
     xit 'returns hash with transformed with pipeline values' do
-
     end
   end
 end
