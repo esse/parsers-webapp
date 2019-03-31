@@ -2,7 +2,9 @@ require 'date'
 require_relative 'dataset'
 
 class Database
-  def initialize(mutex: Mutex)
+  MUTEX = Mutex.new
+
+  def initialize
     reload!
     @modified_at = file_modification_time
     # @semaphore = mutex.new # synchronise access to @json
@@ -22,9 +24,9 @@ class Database
   end
 
   def reload!
-    # semaphore.synchronize do
+    MUTEX.synchronize do
       @json = JSONL.parse(File.read(ENV['DATABASE']))
-    # end
+    end
   end
 
   def dataset
@@ -36,9 +38,9 @@ class Database
   private
 
   def json
-    # semaphore.synchronize do
+    MUTEX.synchronize do
       @json
-    # end
+    end
   end
 
   attr_reader :modified_at, :semaphore
