@@ -3,29 +3,40 @@ require 'forwardable'
 class Dataset
   extend Forwardable
 
-  def initialize(array)
+  def initialize(array, date: Date)
     @array = array
+    @date = date
   end
 
   def filter_by_name(name)
-    Dataset.new(array.find_all { |record| is_similar?(record["name"], name) || is_substring?(record["name"], name) })
+    filtered_by_name = array.find_all do |record|
+      is_similar?(record["name"], name) || is_substring?(record["name"], name)
+    end
+    Dataset.new(filtered_by_name)
   end
 
   def filter_by_date(date)
-    Dataset.new(find_all { |record| (Date.parse(record["date_from"])..Date.parse(record["date_to"])).include?(date) })
+    filtered_by_date = array.find_all do |record|
+      date_from = record["date_from"] # TODO: should be validated!
+      date_to = record["date_to"]
+      date_range = date.parse(date_from)..date.parse(date_to)
+      date_range.include?(date)
+    end
+    Dataset.new(filtered_by_date)
   end
 
   def filter_by_source(source)
-    Dataset.new(array.find_all { |record| record["source"] == source })
+    filtered_by_source = array.find_all do |record|
+      record["source"] == source
+    end
+    Dataset.new(filtered_by_source)
   end
 
   def_delegator :@array, :each
 
   private
 
-
   # TODO: move me to similarity scoring
-
   def is_similar?(a, b)
     Levenshtein.normalized_distance(a.downcase,b.downcase) < 0.3 # chosen quasi-randomly ;)
   end
@@ -34,5 +45,5 @@ class Dataset
     a.downcase.include?(b.downcase) || b.downcase.include?(a.downcase)
   end
 
-  attr_reader :array
+  attr_reader :array, :date
 end
