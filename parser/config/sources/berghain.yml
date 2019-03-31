@@ -16,12 +16,14 @@ attributes:
     - operand: inner_html
     - operand: first_match_group_from_regexp
       argument: ^\s+([A-Za-z0-9 ]+)\s+\<span
+    - operand: parse_as_date
   date_to:
     - operand: xpath
       argument: ".//h4/span/a"
     - operand: inner_html
     - operand: first_match_group_from_regexp
       argument: ^\s+([A-Za-z0-9 ]+)\s+\<span
+    - operand: parse_as_date
   source:
     - operand: constant
       argument: "berghain"
