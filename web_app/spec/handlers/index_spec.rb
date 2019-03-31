@@ -39,29 +39,42 @@ describe Handlers::Index do
     end
 
     describe 'when filtering with name' do
-      let(:params) { {"name" => "XYZ"} }
+      let(:params) { {"name" => some_name} }
+      let(:some_name) { "NAME" }
 
       it 'must call filter_by_name on dataset' do
-        expect(dataset_mock).to receive(:filter_by_name).and_return(dataset_mock)
+        expect(dataset_mock).to receive(:filter_by_name).with(some_name).and_return(dataset_mock)
         index_handler.call
       end
     end
 
     describe 'when filtering with source' do
-      let(:params) { {"source" => "XYZ"} }
+      let(:params) { {"source" => some_source} }
+      let(:some_source) { "SOURCE" }
 
       it 'must call filter_by_source on dataset' do
-        expect(dataset_mock).to receive(:filter_by_source).and_return(dataset_mock)
+        expect(dataset_mock).to receive(:filter_by_source).with(some_source).and_return(dataset_mock)
         index_handler.call
       end
     end
 
-    # describe 'when filtering with date' do
-    #   let(:params) { {date: "XYZ"} }
+    describe 'when filtering with date' do
+      let(:params) { {date: "XYZ"} }
+      let(:some_date) { "ABC" }
 
-    #   it 'must return not mutated dataset' do
-    #     expect(index_handler.locals).to eq({ dataset: dataset_mock })
-    #   end
-    # end
+      before do
+        allow(date_mock).to receive(:parse).and_return(some_date)
+      end
+
+      it 'must call filter_by_date on dataset' do
+        expect(dataset_mock).to receive(:filter_by_date).with(some_date).and_return(dataset_mock)
+        index_handler.call
+      end
+
+      it 'must parse incoming date' do
+        expect(date_mock).to receive(:parse).and_return(some_date)
+        index_handler.call
+      end
+    end
   end
 end
