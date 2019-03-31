@@ -6,12 +6,12 @@ describe Handlers::Index do
   subject(:index_handler) do
     Handlers::Index.new(
       params: params, database: database_mock,
-      date: date_mock, adapter: adapter_class_mock
+      date_class: date_mock, adapter: adapter_class_mock
     )
   end
 
   let(:database_mock) { instance_double('Database') }
-  let(:date_mock) { instance_double('Date') }
+  let(:date_mock) { class_double('Date') }
   let(:adapter_class_mock) { class_double('Adapters::Index') }
   let(:adapter_mock) { instance_double('Adapters::Index') }
   let(:dataset_mock) { instance_double('Dataset') }
@@ -59,11 +59,12 @@ describe Handlers::Index do
     end
 
     describe 'when filtering with date' do
-      let(:params) { {date: "XYZ"} }
+      let(:params) { {"date" => "XYZ"} }
       let(:some_date) { "ABC" }
 
       before do
         allow(date_mock).to receive(:parse).and_return(some_date)
+        allow(dataset_mock).to receive(:filter_by_date).and_return(dataset_mock)
       end
 
       it 'must call filter_by_date on dataset' do

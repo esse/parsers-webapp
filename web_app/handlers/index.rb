@@ -1,10 +1,10 @@
 module Handlers
   class Index
-    def initialize(params:, database:, date: Date, adapter: Adapters::Index)
+    def initialize(params:, database:, date_class: Date, adapter: Adapters::Index)
       @params = params
       @dataset = database.dataset
       @adapter = adapter
-      @date = date
+      @date_class = date_class
     end
 
     def call
@@ -13,7 +13,7 @@ module Handlers
         @dataset = @dataset.filter_by_name(sanitized_params["name"])
       end
       if sanitized_params["date"]
-        date = date.parse(sanitized_params["date"])
+        date = date_class.parse(sanitized_params["date"])
         @dataset = @dataset.filter_by_date(date)
       end
       if sanitized_params["source"]
@@ -26,6 +26,6 @@ module Handlers
 
     private
 
-    attr_reader :params, :date, :adapter
+    attr_reader :params, :date_class, :adapter
   end
 end
