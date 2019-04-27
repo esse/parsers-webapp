@@ -1,5 +1,5 @@
 
-Since there are many sources, and even more to come - I've decided to build kind-of universal parser, with steps defined using YAML.
+Since there are many sources, and even more to come - I've decided to build a kind-of universal parser, with steps defined using YAML (which may or may not be overengineering - I'm perfectly aware of that. However, the whole point of this tasks is to show the best side of your code).
 
 Every source is defined in yaml in sources/ catalog. Possible steps are:
 * xpath/1 - extract text using xpath provided as argument

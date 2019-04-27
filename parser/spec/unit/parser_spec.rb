@@ -32,7 +32,7 @@ describe Parser do
       .to receive(:new)
       .with(instructions: list_instruction, parsed_html: parsed_html)
       .and_return(list_pipeline)
-    allow(list_pipeline).to receive(:process).and_return(event_lists)
+    allow(list_pipeline).to receive(:guarded_process).and_return(event_lists)
     allow(nokogiri_html_mock).to receive(:parse).with(html).and_return(parsed_html)
   end
 
@@ -52,7 +52,7 @@ describe Parser do
     end
 
     it 'process pipeline on list of events' do
-      expect(list_pipeline).to receive(:process).and_return(event_lists)
+      expect(list_pipeline).to receive(:guarded_process).and_return(event_lists)
 
       parser.parse
     end

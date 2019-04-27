@@ -10,11 +10,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = 'Usage: cli.rb [options]'
 
-  opts.on('-c', '--check', 'Check yamls only') do |c|
-    options[:check] = c
-  end
-
-  opts.on('-f', '--filter expression', 'Filter yamls with provided bash-like expression') do |f|
+  opts.on('-f', '--filter expression', 'Filter yamls with bash-like expression') do |f|
     options[:filter] = f
   end
 

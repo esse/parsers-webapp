@@ -8,14 +8,18 @@ class Pipeline
     @parsed_html = parsed_html
   end
 
-  def process
-    # https://dry-rb.org/gems/dry-monads/result/
-    # TODO: refactor me into a parsing monad
-    to_change = parsed_html
-    instructions.each do |instruction|
-      to_change = Command.new(instruction: instruction, nodes: to_change).run
+  def guarded_process
+    begin
+      process
+    rescue StandardError
+      nil
     end
-    to_change
+  end
+
+  def process
+    instructions.inject(parsed_html) do |html, instruction|
+      Command.new(nodes: html, instruction: instruction).run
+    end
   end
 
   private

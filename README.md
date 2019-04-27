@@ -1,3 +1,9 @@
+I've provided you with the default database - therefore to run webapp it will be sufficient to simply type:
+
+```
+make web_app
+```.
+
 To run everything please type:
 
 ```

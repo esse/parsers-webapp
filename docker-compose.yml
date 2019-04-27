@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   web_app:
-    image: esse/dahlia-web_app
+    image: esse/web_app
     ports:
       - "9292:9292"
     volumes:
@@ -10,7 +10,9 @@ services:
     environment:
       - DATABASE=/app/data/database.jsonl
   parser:
-    image: esse/dahlia-parser
-    command: bundle exec ruby cli.rb -w /app/data/database.jsonl
+    image: esse/parser
+    command: ruby run.rb
+    environment:
+      - DATABASE=/app/data/database.jsonl
     volumes:
       - ./data:/app/data

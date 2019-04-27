@@ -6,13 +6,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.2'
 
 gem 'jsonl'
+gem 'levenshtein'
 gem 'puma'
 gem 'sinatra'
-gem "levenshtein"
 
 group :development do
-  gem 'rubocop', require: false
   gem 'pry'
+  gem 'rubocop', require: false
 end
 
 group :test do

@@ -15,7 +15,7 @@ describe Adapters::Index do
     end
 
     describe 'with one of the paramters blank' do
-      let(:params) { {name: ""} }
+      let(:params) { { name: '' } }
 
       it 'must filter it' do
         expect(index_adapter.sanitized_params).to eq({})
@@ -23,7 +23,7 @@ describe Adapters::Index do
     end
 
     describe 'with extra parameter' do
-      let(:params) { {XXX: "YYY"} }
+      let(:params) { { XXX: 'YYY' } }
 
       it 'must filter it' do
         expect(index_adapter.sanitized_params).to eq({})
@@ -31,10 +31,10 @@ describe Adapters::Index do
     end
 
     describe 'with correct param' do
-      let(:params) { {name: "event"} }
+      let(:params) { { name: 'event' } }
 
       it 'must pass it through' do
-        expect(index_adapter.sanitized_params).to eq(name: "event")
+        expect(index_adapter.sanitized_params).to eq(name: 'event')
       end
     end
   end

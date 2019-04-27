@@ -7,7 +7,7 @@ class Database
   def initialize
     reload!
     @modified_at = file_modification_time
-    @sources = @json.map { |record| record["source"] }.uniq.sort
+    @sources = @json.map { |record| record['source'] }.uniq.sort
   end
 
   def file_modification_time

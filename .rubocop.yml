@@ -1,2 +1,29 @@
 Style/Documentation:
   Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - parser/lib/command.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - parser/lib/command.rb
+    - parser/app.rb
+
+Style/MultilineBlockChain:
+  Exclude:
+    - parser/lib/command.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - parser/lib/command.rb
+    - parser/app.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - parser/spec/**/*.rb
+    - web_app/spec/**/*.rb
+
+
+Metrics/LineLength:
+  Max: 95

@@ -23,13 +23,12 @@ describe Handlers::Index do
   end
 
   describe '#locals' do
-
     describe 'with empty params' do
       let(:params) { {} }
 
       it 'must return not mutated dataset' do
         index_handler.call
-        expect(index_handler.locals).to eq({ dataset: dataset_mock })
+        expect(index_handler.locals).to eq(dataset: dataset_mock)
       end
 
       it 'must call sanitized_params on adapter' do
@@ -39,28 +38,34 @@ describe Handlers::Index do
     end
 
     describe 'when filtering with name' do
-      let(:params) { {"name" => some_name} }
-      let(:some_name) { "NAME" }
+      let(:params) { { 'name' => some_name } }
+      let(:some_name) { 'NAME' }
 
       it 'must call filter_by_name on dataset' do
-        expect(dataset_mock).to receive(:filter_by_name).with(some_name).and_return(dataset_mock)
+        expect(dataset_mock)
+          .to receive(:filter_by_name)
+          .with(some_name)
+          .and_return(dataset_mock)
         index_handler.call
       end
     end
 
     describe 'when filtering with source' do
-      let(:params) { {"source" => some_source} }
-      let(:some_source) { "SOURCE" }
+      let(:params) { { 'source' => some_source } }
+      let(:some_source) { 'SOURCE' }
 
       it 'must call filter_by_source on dataset' do
-        expect(dataset_mock).to receive(:filter_by_source).with(some_source).and_return(dataset_mock)
+        expect(dataset_mock)
+          .to receive(:filter_by_source)
+          .with(some_source)
+          .and_return(dataset_mock)
         index_handler.call
       end
     end
 
     describe 'when filtering with date' do
-      let(:params) { {"date" => "2018-10-11"} }
-      let(:some_date) { "ABC" }
+      let(:params) { { 'date' => '2018-10-11' } }
+      let(:some_date) { 'ABC' }
 
       before do
         allow(date_mock).to receive(:parse).and_return(some_date)
@@ -68,7 +73,10 @@ describe Handlers::Index do
       end
 
       it 'must call filter_by_date on dataset' do
-        expect(dataset_mock).to receive(:filter_by_date).with(some_date).and_return(dataset_mock)
+        expect(dataset_mock)
+          .to receive(:filter_by_date)
+          .with(some_date)
+          .and_return(dataset_mock)
         index_handler.call
       end
 
@@ -79,8 +87,8 @@ describe Handlers::Index do
     end
 
     describe 'when filtering with wrong date' do
-      let(:params) { {"date" => "XXXX"} }
-      let(:some_date) { "ABC" }
+      let(:params) { { 'date' => 'XXXX' } }
+      let(:some_date) { 'ABC' }
 
       before do
         allow(date_mock).to receive(:parse).and_return(some_date)

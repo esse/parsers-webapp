@@ -8,12 +8,13 @@ class Parser
     @nokogiri_html = nokogiri_html
   end
 
-  def parse # Todo: there are too many responsibilities here
+  # TODO: there are too many responsibilities here
+  def parse
     list.map do |event|
       source['attributes'].dup.map do |attr_name, attr_cfg|
         [
           attr_name,
-          pipeline.new(instructions: attr_cfg, parsed_html: event).process
+          pipeline.new(instructions: attr_cfg, parsed_html: event).guarded_process
         ]
       end.to_h
     end
@@ -28,7 +29,7 @@ class Parser
   end
 
   def list
-    @list ||= pipeline.new(instructions: source['list'], parsed_html: parsed_html).process
+    @list ||= pipeline.new(instructions: source['list'], parsed_html: parsed_html).guarded_process
   end
 
   def xpaths

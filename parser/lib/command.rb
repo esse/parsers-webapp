@@ -16,6 +16,7 @@ class Command
 
   attr_reader :instruction, :nodes
 
+  # TODO: extract separate commands classes
   def step
     case instruction['operand']
     when 'xpath'
@@ -33,9 +34,9 @@ class Command
     when 'or'
       lambda { |x|
         instruction['argument'].flat_map do |instructions|
-          Pipeline.new(instructions: instructions, parsed_html: x).process
+          Pipeline.new(instructions: instructions, parsed_html: x).guarded_process
         end
-                               .find { |x| !x.nil? && !x.blank? }
+                               .find { |node| !node.nil? && !node.blank? }
       }
     when 'uniq'
       ->(x) { x.uniq }
@@ -46,7 +47,7 @@ class Command
     when 'concat'
       lambda { |x|
         instruction['argument'].flat_map do |instructions|
-          Pipeline.new(instructions: instructions, parsed_html: x).process
+          Pipeline.new(instructions: instructions, parsed_html: x).guarded_process
         end
       }
     when 'prepend_string'
@@ -54,7 +55,10 @@ class Command
     when 'prepend_single_string'
       ->(x) { instruction['argument'] + x }
     when 'puts'
-      ->(x) { puts x; x }
+      lambda { |x|
+        puts x
+        x
+      }
     when 'first'
       ->(x) { x.first }
     end

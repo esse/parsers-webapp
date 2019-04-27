@@ -1,9 +1,9 @@
 module Validators
   class Date
-    def self.is_valid?(date_string)
+    def self.valid?(date_string)
       begin
         ::Date.parse(date_string)
-      rescue ArgumentError
+      rescue ArgumentError, TypeError
         return false
       end
       true

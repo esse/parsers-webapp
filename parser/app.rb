@@ -18,10 +18,8 @@ class App
   end
 
   def run!
-    return if options[:check]
-
     parsed_output = Sources.new(expression: options[:filter]).flat_map do |source|
-      Paginator.new(source: source).get_page_list.flat_map do |url|
+      Paginator.new(source: source).pages_list.flat_map do |url|
         html = Fetcher.new(url: url).fetch
         Parser.new(source: source, html: html).parse
       end

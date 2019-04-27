@@ -5,18 +5,21 @@ class Paginator
     @pipeline = pipeline
   end
 
-  def get_page_list # return list of uris
+  # return list of uris
+  def pages_list
     return Array(source['url']) unless source['pagination']
 
     Pipeline.new(
       instructions: source['pagination'],
-      parsed_html: Nokogiri::HTML(
-        fetcher.new(url: source['url']).fetch
-      )
-    ).process
+      parsed_html: parsed_html
+    ).guarded_process
   end
 
   private
+
+  def parsed_html
+    Nokogiri::HTML(fetcher.new(url: source['url']).fetch)
+  end
 
   attr_reader :source, :fetcher, :pipeline
 end

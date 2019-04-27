@@ -11,19 +11,16 @@ describe Dataset do
 
   describe '#filter_by_name' do
     it 'must select good records from array and return new dataset with them' do
-
     end
   end
 
   describe '#filter_by_date' do
     xit 'must select good records from array and return new dataset with them' do
-
     end
   end
 
   describe '#filter_by_source' do
     xit 'must select good records from array and return new dataset with them' do
-
     end
   end
 end
